@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'uz.ksan.SocialMedia.backend'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+//    testImplementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-api', version: '2.6.0'
+//
+//
+//    // jsonwebtoken
+//    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+//    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.12.6'
+//    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.5'
+//
+//
+//
+//    // i/o validation
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
+//
+//
+//    //thymeleaf, to send emails
+//    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+//
+//
+//    //spring mail
+//    implementation 'org.springframework.boot:spring-boot-starter-mail'
+//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+//
+//
+//    //spring security
+//    testImplementation 'org.springframework.security:spring-security-test'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//
+
+    //spring framework
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+    //spring WEB
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
+    // RabbitMQ
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+
+    //postgreSQL
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    //redis & cache
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
