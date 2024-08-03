@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.ksan.socialmedia.backend.socialnetwork1.model.UserEntity;
 import uz.ksan.socialmedia.backend.socialnetwork1.repository.UserRepository;
@@ -19,16 +20,13 @@ public class UserServiceImpl implements uz.ksan.socialmedia.backend.socialnetwor
 
     @Autowired
     private UserRepository repository;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserEntity> displayAllUsers() {
         return repository.findAll();
     }
 
-    @Override
-    public UserEntity saveUser(UserEntity user) {
-        return repository.save(user);
-    }
 
     @Override
     public UserEntity updateUser(UserEntity user) {
@@ -42,18 +40,18 @@ public class UserServiceImpl implements uz.ksan.socialmedia.backend.socialnetwor
 
     @Override
     public Optional<UserEntity> findUserByFirstName(String firstName) {
-        return Optional.ofNullable(repository.findUserByFirstName(firstName));
+        return repository.findUserByFirstName(firstName);
     }
 
     @Override
     public Optional<UserEntity> findUserByLastName(String lastName)
     {
-        return Optional.ofNullable(repository.findUserByLastName(lastName));
+        return (repository.findUserByLastName(lastName));
     }
 
     @Override
     public Optional<UserEntity> findUserByEmail(String email) {
-        return Optional.ofNullable(repository.findUserByEmail(email));
+        return (repository.findUserByEmail(email));
     }
 
     @Override
@@ -65,6 +63,14 @@ public class UserServiceImpl implements uz.ksan.socialmedia.backend.socialnetwor
     public void deleteUserByEmail(String email) {
         repository.deleteUserByEmail(email);
     }
+    
+    public Optional<UserEntity> findUserByUsername(String userName) {
+        return repository.findUserByUserName(userName);
+    }
 
 
+    public void addLoginUser(UserEntity user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        repository.save(user);
+    }
 }

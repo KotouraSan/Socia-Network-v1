@@ -20,32 +20,30 @@ repositories {
 dependencies {
 
 //    testImplementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-api', version: '2.6.0'
-//
-//
-//    // jsonwebtoken
+
+
+      // jsonwebtoken
 //    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
 //    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.12.6'
 //    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.5'
-//
-//
-//
-//    // i/o validation
+
+
+      // i/o validation
 //    implementation 'org.springframework.boot:spring-boot-starter-validation'
-//
-//
-//    //thymeleaf, to send emails
-//    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-//
-//
-//    //spring mail
+
+
+      //spring mail
 //    implementation 'org.springframework.boot:spring-boot-starter-mail'
 //    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-//
-//
-//    //spring security
-//    testImplementation 'org.springframework.security:spring-security-test'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-//
+
+    //h2 database
+//    runtimeOnly 'com.h2database:h2'
+
+    //spring security and thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+    testImplementation 'org.springframework.security:spring-security-test'
+
 
     //spring framework
     implementation 'org.springframework.boot:spring-boot-starter-web'

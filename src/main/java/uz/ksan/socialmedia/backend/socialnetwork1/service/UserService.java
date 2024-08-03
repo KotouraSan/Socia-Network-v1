@@ -9,7 +9,6 @@ public interface UserService {
 
 
     List<UserEntity> displayAllUsers();
-    UserEntity saveUser(UserEntity user);
     UserEntity updateUser(UserEntity user);
     Optional<UserEntity> findUserById(Long id);
     Optional<UserEntity> findUserByFirstName(String firstName);
@@ -17,5 +16,6 @@ public interface UserService {
     Optional<UserEntity> findUserByEmail(String email);
     void deleteUserById(Long id);
     void deleteUserByEmail(String email);
+    void addLoginUser(UserEntity user);
 
 }

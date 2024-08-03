@@ -58,6 +58,8 @@ public class UserEntity {
     @NonNull
     private Boolean enabled;
 
+    private String role;
+
 //    @Column(nullable=false,updatable = false)
 //    @CreatedDate
 //    private LocalDateTime createdDate;
