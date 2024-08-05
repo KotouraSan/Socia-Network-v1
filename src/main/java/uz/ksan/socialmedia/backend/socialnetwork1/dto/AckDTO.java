@@ -16,5 +16,5 @@ public class AckDTO {
                 .answer(answer)
                 .build();
 
-    }
+    }         //DTO for deleting users
 }
