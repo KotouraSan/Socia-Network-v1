@@ -2,13 +2,10 @@ package uz.ksan.socialmedia.backend.socialnetwork1.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import uz.ksan.socialmedia.backend.socialnetwork1.model.UserEntity;
+import uz.ksan.socialmedia.backend.socialnetwork1.models.entities.UserEntity;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {

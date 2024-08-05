@@ -1,10 +1,12 @@
-package uz.ksan.socialmedia.backend.socialnetwork1.model;
+package uz.ksan.socialmedia.backend.socialnetwork1.models.entities;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.ColumnTransformer;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @SequenceGenerator(name="yourSequenceGenerator", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="yourSequenceGenerator")
@@ -49,14 +51,6 @@ public class UserEntity {
     @NonNull
     @ColumnTransformer(write = "LOWER(?)")
     private String email;
-
-    @Column
-    @NonNull
-    private Boolean accountLocked;
-
-    @Column
-    @NonNull
-    private Boolean enabled;
 
     private String role;
 

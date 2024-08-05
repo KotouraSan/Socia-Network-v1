@@ -1,13 +1,14 @@
 package uz.ksan.socialmedia.backend.socialnetwork1.service;
 
-import uz.ksan.socialmedia.backend.socialnetwork1.model.PastebinEntity;
+import uz.ksan.socialmedia.backend.socialnetwork1.models.entities.PastebinEntity;
+import uz.ksan.socialmedia.backend.socialnetwork1.models.entities.UserEntity;
 
 import java.util.List;
 
 public interface PastebinService {
-    PastebinEntity getPostByUrl(String url);
-//    PastebinEntity getPostByAuthor(String author);
-    PastebinEntity createPost(String content);
+    PastebinEntity createPost(PastebinEntity post);
     List<PastebinEntity> displayAll();
+    PastebinEntity getPostByUrl(String url);
+    PastebinEntity getPostByAuthor(UserEntity author);
 
 }

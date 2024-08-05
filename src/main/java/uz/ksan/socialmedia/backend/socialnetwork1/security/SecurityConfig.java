@@ -2,7 +2,6 @@ package uz.ksan.socialmedia.backend.socialnetwork1.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -11,16 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import uz.ksan.socialmedia.backend.socialnetwork1.service.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +20,7 @@ import uz.ksan.socialmedia.backend.socialnetwork1.service.impl.UserDetailsServic
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public org.springframework.security.core.userdetails.UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
     }
 
@@ -39,21 +31,24 @@ public class SecurityConfig {
     SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->auth.requestMatchers(
-                                "api/v1/users/displayusers",
                                 "api/v1/users/newLoginUser",
                                 "api/v1/pastebin/find/posturl/**",
-                                "api/v1/users/find/id/**",
-                                "api/v1/users/find/name/**",
-                                "api/v1/users/find/lname/**",
-                                "api/v1/users/find/email/**",
+                                "api/v1/pastebin/find/author/**",
+                                "api/v1/users/find/**",
                                 "api/v1/users/newLoginUser"
+//                                "api/v1/users/find/id/**",
+//                                "api/v1/users/find/name/**",
+//                                "api/v1/users/find/lname/**",
+//                                "api/v1/users/find/email/**",
                                 ).permitAll()
                         .requestMatchers(
+                                "api/v1/users/display",
                                 "/api/v1/pastebin/displayall",
                                 "api/v1/pastebin/createpost",
                                 "api/v1/users/updateUser",
                                 "api/v1/users/delete/email/**",
-                                "api/v1/users/delete/id/**").authenticated())
+                                "api/v1/users/delete/id/**")
+                        .authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .httpBasic(Customizer.withDefaults())
                 .build();

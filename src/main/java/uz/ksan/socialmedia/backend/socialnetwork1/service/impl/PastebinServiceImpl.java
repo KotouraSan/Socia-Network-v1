@@ -3,11 +3,13 @@ package uz.ksan.socialmedia.backend.socialnetwork1.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import uz.ksan.socialmedia.backend.socialnetwork1.model.PastebinEntity;
-import uz.ksan.socialmedia.backend.socialnetwork1.model.UserEntity;
+import uz.ksan.socialmedia.backend.socialnetwork1.models.entities.PastebinEntity;
+import uz.ksan.socialmedia.backend.socialnetwork1.models.entities.UserEntity;
 import uz.ksan.socialmedia.backend.socialnetwork1.repository.PastebinRepository;
 import uz.ksan.socialmedia.backend.socialnetwork1.repository.UserRepository;
 import uz.ksan.socialmedia.backend.socialnetwork1.service.PastebinService;
@@ -29,12 +31,11 @@ public class PastebinServiceImpl implements PastebinService {
     UserRepository userRepository;
 
     @Override
-    public PastebinEntity createPost(String content) {
+    @CachePut("users")
+    public PastebinEntity createPost(PastebinEntity post) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity author = userRepository.findUserByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        PastebinEntity post = new PastebinEntity();
-        post.setContent(content);
         post.setCreatedAt(LocalDateTime.now());
         post.setUrl(UUID.randomUUID().toString());
         post.setAuthor(author);
@@ -42,19 +43,22 @@ public class PastebinServiceImpl implements PastebinService {
     }
 
     @Override
+    public List<PastebinEntity> displayAll() {
+        return pastebinRepository.findAll();
+    }
+
+    @Override
+    @Cacheable("users")
     public PastebinEntity getPostByUrl(String url) {
         return pastebinRepository.findByUrl(url)
                 .orElseThrow(() -> new RuntimeException("Pastebin Not Found"));
     }
 
-//    @Override
-//    public PastebinEntity getPostByAuthor(String author) {
-//        return pastebinRepository.findByAuthor(author)
-//                .orElseThrow(() -> new RuntimeException("Pastebin Not Found"));
-//    }
-
     @Override
-    public List<PastebinEntity> displayAll() {
-        return pastebinRepository.findAll();
+    public PastebinEntity getPostByAuthor(UserEntity author) {
+        return pastebinRepository.findByAuthor(author)
+                .orElseThrow(() -> new RuntimeException("Pastebin Not Found"));
     }
+
+
 }

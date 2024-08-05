@@ -1,9 +1,10 @@
-package uz.ksan.socialmedia.backend.socialnetwork1.model;
+package uz.ksan.socialmedia.backend.socialnetwork1.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -13,8 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "pastebin")
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PastebinEntity {
+public class PastebinEntity implements Serializable {
 
     @SequenceGenerator(name="yourSequenceGenerator1", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.TABLE, generator="yourSequenceGenerator1")
@@ -30,4 +32,5 @@ public class PastebinEntity {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
+
 }
