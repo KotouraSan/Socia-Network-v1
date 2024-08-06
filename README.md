@@ -14,7 +14,7 @@ Secure authentication and authorization mechanisms.
 Create users with specific roles and restrict access to pages and requests based on these roles.
 
 <h2>Data Encryption</h2>
-Sensitive data such as passwords are securely encrypted.
+Sensitive data such as passwords and other personal information are securely encrypted. All sensitive data transfers are encrypted to ensure privacy and security.
 
 <h2>Post Creation and Retrieval</h2>
 Users can write posts and retrieve them via unique URLs.
@@ -24,6 +24,12 @@ PostgreSQL is used as the primary database.
 
 <h2>Caching</h2>
 Redis is implemented for efficient caching.
+
+<h2>REST API</h2>
+The application uses RESTful principles for designing networked applications.
+
+<h2>Hibernate</h2>
+Hibernate ORM is used for database operations, enabling seamless interaction with the PostgreSQL database.
 
 <h2>Deployment</h2>
 The entire application is containerized and deployed using Docker.
@@ -48,6 +54,11 @@ In-memory data structure store used for caching.
 <h3>Docker</h3>
 Containerization platform for deployment.
 
+<h3>Hibernate</h3>
+Object-relational mapping framework for database operations.
+
+<h3>REST API</h3>
+Architecture style for designing networked applications.
 
 ## **Getting Started**
 
@@ -57,7 +68,6 @@ Containerization platform for deployment.
 - Docker
 - Docker Compose
 - Postman
-  
 
 ### **Installation**
 
@@ -74,7 +84,7 @@ Containerization platform for deployment.
 
 ### **Configuration**
 
-The application configuration is managed via `application.properties` file. Ensure to set up your PostgreSQL and Redis configurations accordingly.
+The application configuration is managed via the `application.properties` file. Ensure to set up your PostgreSQL and Redis configurations accordingly.
 
 ### **Usage**
 
